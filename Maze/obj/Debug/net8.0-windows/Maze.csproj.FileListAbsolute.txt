@@ -1,0 +1,17 @@
+C:\Users\endiy\source\repos\Maze\Maze\bin\Debug\net8.0-windows\Maze.exe
+C:\Users\endiy\source\repos\Maze\Maze\bin\Debug\net8.0-windows\Maze.deps.json
+C:\Users\endiy\source\repos\Maze\Maze\bin\Debug\net8.0-windows\Maze.runtimeconfig.json
+C:\Users\endiy\source\repos\Maze\Maze\bin\Debug\net8.0-windows\Maze.dll
+C:\Users\endiy\source\repos\Maze\Maze\bin\Debug\net8.0-windows\Maze.pdb
+C:\Users\endiy\source\repos\Maze\Maze\obj\Debug\net8.0-windows\Maze.Form1.resources
+C:\Users\endiy\source\repos\Maze\Maze\obj\Debug\net8.0-windows\Maze.csproj.GenerateResource.cache
+C:\Users\endiy\source\repos\Maze\Maze\obj\Debug\net8.0-windows\Maze.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\endiy\source\repos\Maze\Maze\obj\Debug\net8.0-windows\Maze.AssemblyInfoInputs.cache
+C:\Users\endiy\source\repos\Maze\Maze\obj\Debug\net8.0-windows\Maze.AssemblyInfo.cs
+C:\Users\endiy\source\repos\Maze\Maze\obj\Debug\net8.0-windows\Maze.csproj.CoreCompileInputs.cache
+C:\Users\endiy\source\repos\Maze\Maze\obj\Debug\net8.0-windows\Maze.dll
+C:\Users\endiy\source\repos\Maze\Maze\obj\Debug\net8.0-windows\refint\Maze.dll
+C:\Users\endiy\source\repos\Maze\Maze\obj\Debug\net8.0-windows\Maze.pdb
+C:\Users\endiy\source\repos\Maze\Maze\obj\Debug\net8.0-windows\Maze.genruntimeconfig.cache
+C:\Users\endiy\source\repos\Maze\Maze\obj\Debug\net8.0-windows\ref\Maze.dll
+C:\Users\endiy\source\repos\Maze\Maze\obj\Debug\net8.0-windows\Maze.Properties.Resources.resources
