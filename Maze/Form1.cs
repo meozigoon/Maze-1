@@ -152,8 +152,8 @@
                 Delay(clock); // 0.5초 대기
                 if (a == 0)
                 {
-                    label1.Text += time[0] * clock / 1000.0 + "s";
-                    label2.Text += time[1] * clock / 1000.0 + "s";
+                    label1.Text = "BFS : " + time[0] * clock / 1000.0 + "s";
+                    label2.Text = "DFS : " + time[1] * clock / 1000.0 + "s";
                     break; // 모든 플레이어가 이동할 수 없을 때 종료
                 }
             }
@@ -220,13 +220,13 @@
             if (Size.Width < Size.Height)
             {
                 size = 4 * Size.Width / ((int)numericUpDown1.Value * 5);
-                Heightstart = numericUpDown1.Location.Y + numericUpDown1.Size.Height + size / 8;
+                Heightstart = numericUpDown1.Location.Y + numericUpDown1.Size.Height + Size.Height / 10;
                 Widthstart = Size.Width / 2 - Convert.ToInt32(size * (int)numericUpDown1.Value / 2.0);
             }
             else
             {
                 size = 4 * (Size.Height - numericUpDown1.Location.Y - numericUpDown1.Size.Height) / ((int)numericUpDown1.Value * 5);
-                Heightstart = numericUpDown1.Location.Y + numericUpDown1.Size.Height + size / 8;
+                Heightstart = numericUpDown1.Location.Y + numericUpDown1.Size.Height + Size.Height / 10;
                 Widthstart = Size.Width / 2 - Convert.ToInt32(size * (int)numericUpDown1.Value / 2.0);
             }
             for (int i = 0; i < mazeWall.GetLength(0); i++)
@@ -315,7 +315,11 @@
             players[1] = SimulateMovement(players[1], dfs, mazeWall);
             players[0].Path.RemoveAt(0); // 시작 위치는 제외
             players[1].Path.RemoveAt(0); // 시작 위치는 제외
-            SimulateMove(players, 500);
+            button1.Enabled = false;
+            button2.Enabled = false;
+            SimulateMove(players, (int)numericUpDown2.Value);
+            button1.Enabled = true;
+            
         }
     }
 
