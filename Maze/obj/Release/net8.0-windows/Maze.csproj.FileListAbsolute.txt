@@ -20,8 +20,6 @@ C:\Users\Dongha Lee\Source\Repos\Maze-1\Maze\bin\Release\net8.0-windows\Maze.dep
 C:\Users\Dongha Lee\Source\Repos\Maze-1\Maze\bin\Release\net8.0-windows\Maze.runtimeconfig.json
 C:\Users\Dongha Lee\Source\Repos\Maze-1\Maze\bin\Release\net8.0-windows\Maze.dll
 C:\Users\Dongha Lee\Source\Repos\Maze-1\Maze\bin\Release\net8.0-windows\Maze.pdb
-C:\Users\Dongha Lee\Source\Repos\Maze-1\Maze\obj\Release\net8.0-windows\Interop.Microsoft.Office.Interop.Excel.dll
-C:\Users\Dongha Lee\Source\Repos\Maze-1\Maze\obj\Release\net8.0-windows\Maze.csproj.ResolveComReference.cache
 C:\Users\Dongha Lee\Source\Repos\Maze-1\Maze\obj\Release\net8.0-windows\Maze.Form1.resources
 C:\Users\Dongha Lee\Source\Repos\Maze-1\Maze\obj\Release\net8.0-windows\Maze.Properties.Resources.resources
 C:\Users\Dongha Lee\Source\Repos\Maze-1\Maze\obj\Release\net8.0-windows\Maze.csproj.GenerateResource.cache
