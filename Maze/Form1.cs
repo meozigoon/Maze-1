@@ -1,8 +1,4 @@
-﻿using Microsoft.VisualBasic.Devices;
-using System.Runtime.InteropServices;
-using Excel = Microsoft.Office.Interop.Excel;
-
-namespace Maze
+﻿namespace Maze
 {
     public partial class Form1 : Form
     {
@@ -156,8 +152,8 @@ namespace Maze
                 Delay(clock); // 0.5초 대기
                 if (a == 0)
                 {
-                    label1.Text = "BFS : " + time[0] * clock / 1000.0 + "s";
-                    label2.Text = "DFS : " + time[1] * clock / 1000.0 + "s";
+                    label1.Text = "BFS : " + time[0] * clock / 1000.0 + " s";
+                    label2.Text = "DFS : " + time[1] * clock / 1000.0 + " s";
                     break; // 모든 플레이어가 이동할 수 없을 때 종료
                 }
             }
@@ -322,52 +318,19 @@ namespace Maze
             button1.Enabled = false;
             button2.Enabled = false;
             SimulateMove(players, (int)numericUpDown2.Value);
-            Write_Excel();
+            Write_CSV();
             button1.Enabled = true;
         }
         
-        private void Write_Excel()
+        private void Write_CSV()
         {
-            string excelFilePath = @"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\maze\Maze_data.xlsx"; // string으로 저장된 엑셀 경로
+            string csvFilePath = @"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\maze\maze_data.csv";
 
-            Excel.Application excelApp = new Excel.Application();
-            Excel.Workbook workbook = null;
-            Excel.Worksheet worksheet = null;
+            int[] rowData = { (int)numericUpDown1.Value, (int)numericUpDown2.Value, Int32.Parse(label1.Text.Split(" ")[2]), Int32.Parse(label2.Text.Split(" ")[2]) };
 
-            try
+            using (StreamWriter sw = new StreamWriter(csvFilePath, append: true))
             {
-                workbook = excelApp.Workbooks.Open(excelFilePath);
-                worksheet = workbook.Sheets[1] as Excel.Worksheet; // 첫 번째 시트
-
-                // 현재 사용 중인 마지막 행 찾기
-                int lastRow = worksheet.Cells.Find(
-                    "*", worksheet.Cells[1, 1],
-                    Excel.XlFindLookIn.xlFormulas,
-                    Excel.XlLookAt.xlPart,
-                    Excel.XlSearchOrder.xlByRows,
-                    Excel.XlSearchDirection.xlPrevious,
-                    false, Type.Missing, Type.Missing)?.Row ?? 0;
-
-                // 추가할 4개의 데이터
-                worksheet.Cells[lastRow + 1, 1] = numericUpDown1.Value;
-                worksheet.Cells[lastRow + 1, 2] = numericUpDown2.Value;
-                worksheet.Cells[lastRow + 1, 3] = label1.Text.Split(" ")[2];
-                worksheet.Cells[lastRow + 1, 4] = label2.Text.Split(" ")[2];
-
-                workbook.Save();
-            }
-            finally
-            {
-                if (workbook != null)
-                {
-                    workbook.Close(false);
-                    Marshal.ReleaseComObject(workbook);
-                }
-                if (excelApp != null)
-                {
-                    excelApp.Quit();
-                    Marshal.ReleaseComObject(excelApp);
-                }
+                sw.WriteLine(string.Join(",", rowData));
             }
         }
     }
