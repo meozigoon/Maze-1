@@ -43,7 +43,7 @@
             // numericUpDown1
             // 
             numericUpDown1.Location = new Point(143, 9);
-            numericUpDown1.Margin = new Padding(2, 2, 2, 2);
+            numericUpDown1.Margin = new Padding(2);
             numericUpDown1.Maximum = new decimal(new int[] { 80, 0, 0, 0 });
             numericUpDown1.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
@@ -51,11 +51,12 @@
             numericUpDown1.TabIndex = 0;
             numericUpDown1.Value = new decimal(new int[] { 2, 0, 0, 0 });
             numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
+            numericUpDown1.KeyDown += numericUpDown1_KeyDown;
             // 
             // button1
             // 
             button1.Location = new Point(302, 5);
-            button1.Margin = new Padding(2, 2, 2, 2);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
             button1.Size = new Size(142, 36);
             button1.TabIndex = 1;
@@ -67,7 +68,7 @@
             // 
             button2.Enabled = false;
             button2.Location = new Point(448, 5);
-            button2.Margin = new Padding(2, 2, 2, 2);
+            button2.Margin = new Padding(2);
             button2.Name = "button2";
             button2.Size = new Size(115, 36);
             button2.TabIndex = 2;
@@ -118,7 +119,7 @@
             // numericUpDown2
             // 
             numericUpDown2.Location = new Point(776, 11);
-            numericUpDown2.Margin = new Padding(2, 2, 2, 2);
+            numericUpDown2.Margin = new Padding(2);
             numericUpDown2.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numericUpDown2.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDown2.Name = "numericUpDown2";
@@ -140,7 +141,7 @@
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(numericUpDown1);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "Form1";
             Text = "Form1";
             SizeChanged += Form1_SizeChanged;

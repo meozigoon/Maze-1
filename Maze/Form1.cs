@@ -321,7 +321,7 @@
             Write_CSV();
             button1.Enabled = true;
         }
-        
+
         private void Write_CSV()
         {
             string csvFilePath = @"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\maze\maze_data.csv";
@@ -331,6 +331,18 @@
             using (StreamWriter sw = new StreamWriter(csvFilePath, append: true))
             {
                 sw.WriteLine(string.Join(",", rowData));
+            }
+        }
+
+        private void numericUpDown1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1.PerformClick(); // Enter 키를 누르면 버튼 클릭 이벤트 발생
+            }
+            else if (e.KeyCode == Keys.Space)
+            {
+                button2.PerformClick(); // Space 키를 누르면 버튼 클릭 이벤트 발생
             }
         }
     }
