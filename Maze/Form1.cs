@@ -349,7 +349,6 @@
 
         private void button3_Click(object sender, EventArgs e)
         {
-            button1.Enabled = false;
             button3.Enabled = false;
             numericUpDown1.Enabled = false;
             numericUpDown2.Enabled = false;
@@ -360,7 +359,6 @@
                 button2.PerformClick();
                 label7.Text = "횟수 = " + (i + 1).ToString();
             }
-            button1.Enabled = true;
             button3.Enabled = true;
             numericUpDown1.Enabled = true;
             numericUpDown2.Enabled = true;
