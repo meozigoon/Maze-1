@@ -322,8 +322,8 @@ namespace Maze
             button1.Enabled = false;
             button2.Enabled = false;
             SimulateMove(players, (int)numericUpDown2.Value);
-            button1.Enabled = true;
             Write_Excel();
+            button1.Enabled = true;
         }
         
         private void Write_Excel()
