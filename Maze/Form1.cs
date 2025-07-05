@@ -326,7 +326,7 @@
         {
             string csvFilePath = @"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\maze\maze_data.csv";
 
-            decimal[] rowData = { numericUpDown1.Value, numericUpDown2.Value, decimal.Parse(label1.Text.Split(" ")[2]), decimal.Parse(label2.Text.Split(" ")[2]) };
+            decimal[] rowData = { (int)numericUpDown1.Value, (int)numericUpDown2.Value, decimal.Parse(label1.Text.Split(" ")[2]), decimal.Parse(label2.Text.Split(" ")[2]) };
 
             using (StreamWriter sw = new StreamWriter(csvFilePath, append: true))
             {
