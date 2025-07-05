@@ -328,7 +328,7 @@ namespace Maze
         
         private void Write_Excel()
         {
-            string excelFilePath = @"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\Maze_data.xlsx"; // string으로 저장된 엑셀 경로
+            string excelFilePath = @"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\maze\Maze_data.xlsx"; // string으로 저장된 엑셀 경로
 
             Excel.Application excelApp = new Excel.Application();
             Excel.Workbook workbook = null;
