@@ -1,16 +1,20 @@
-﻿namespace Maze
+﻿using Microsoft.VisualBasic.Devices;
+using System.Runtime.InteropServices;
+using Excel = Microsoft.Office.Interop.Excel;
+
+namespace Maze
 {
     public partial class Form1 : Form
     {
         MazeWall[,] mazeWall;
 
         enum Direction { Top = 0, Right = 1, Bottom = 2, Left = 3 }
-        static Point[] directions = new Point[]
+        static System.Drawing.Point[] directions = new System.Drawing.Point[]
         {
-            new Point(0, -1), // Top
-            new Point(1, 0),  // Right
-            new Point(0, 1),  // Bottom
-            new Point(-1, 0), // Left
+            new System.Drawing.Point(0, -1), // Top
+            new System.Drawing.Point(1, 0),  // Right
+            new System.Drawing.Point(0, 1),  // Bottom
+            new System.Drawing.Point(-1, 0), // Left
         };
         public Form1()
         {
@@ -30,38 +34,38 @@
             return;
         }
 
-        List<Point> StartBFS(Player player, MazeWall[,] mazeWalls, int width, int height)
+        List<System.Drawing.Point> StartBFS(Player player, MazeWall[,] mazeWalls, int width, int height)
         {
-            Queue<Point> queue = new Queue<Point>();
-            HashSet<Point> visited = new HashSet<Point>();
+            Queue<System.Drawing.Point> queue = new Queue<System.Drawing.Point>();
+            HashSet<System.Drawing.Point> visited = new HashSet<System.Drawing.Point>();
 
             queue.Enqueue(player.Location);
             visited.Add(player.Location);
 
             // 큐에 넣은 모든 경로를 저장
-            List<Point> bfsMoves = new List<Point>();
+            List<System.Drawing.Point> bfsMoves = new List<System.Drawing.Point>();
 
-            Point[] directions = new Point[]
+            System.Drawing.Point[] directions = new System.Drawing.Point[]
             {
-                new Point(0, -1), // 상
-                new Point(1, 0),  // 우
-                new Point(0, 1),  // 하
-                new Point(-1, 0)  // 좌
+                new System.Drawing.Point(0, -1), // 상
+                new System.Drawing.Point(1, 0),  // 우
+                new System.Drawing.Point(0, 1),  // 하
+                new System.Drawing.Point(-1, 0)  // 좌
             };
 
             while (queue.Count > 0)
             {
-                Point current = queue.Dequeue();
+                System.Drawing.Point current = queue.Dequeue();
                 bfsMoves.Add(current); // 탐색 시도 위치 기록
 
-                if (current == new Point(width - 1, height - 1))
+                if (current == new System.Drawing.Point(width - 1, height - 1))
                     break;
 
                 for (int i = 0; i < 4; i++)
                 {
                     if (!mazeWalls[current.X, current.Y].isnotConnected[i] && !mazeWalls[current.X, current.Y].closedSides.Contains((MazeWall.Closed)i))
                     {
-                        Point next = new Point(current.X + directions[i].X, current.Y + directions[i].Y);
+                        System.Drawing.Point next = new System.Drawing.Point(current.X + directions[i].X, current.Y + directions[i].Y);
                         if (!visited.Contains(next))
                         {
                             queue.Enqueue(next);
@@ -75,19 +79,19 @@
             return bfsMoves;
         }
 
-        List<Point> StartDFS(Player player, MazeWall[,] mazeWalls, int width, int height)
+        List<System.Drawing.Point> StartDFS(Player player, MazeWall[,] mazeWalls, int width, int height)
         {
-            Stack<Point> stack = new Stack<Point>();
-            HashSet<Point> visited = new HashSet<Point>();
+            Stack<System.Drawing.Point> stack = new Stack<System.Drawing.Point>();
+            HashSet<System.Drawing.Point> visited = new HashSet<System.Drawing.Point>();
 
-            List<Point> dfsMoves = new List<Point>();
+            List<System.Drawing.Point> dfsMoves = new List<System.Drawing.Point>();
 
-            Point[] directions = new Point[]
+            System.Drawing.Point[] directions = new System.Drawing.Point[]
             {
-                new Point(0, -1), // 상
-                new Point(1, 0),  // 우
-                new Point(0, 1),  // 하
-                new Point(-1, 0)  // 좌
+                new System.Drawing.Point(0, -1), // 상
+                new System.Drawing.Point(1, 0),  // 우
+                new System.Drawing.Point(0, 1),  // 하
+                new System.Drawing.Point(-1, 0)  // 좌
             };
 
             stack.Push(player.Location);
@@ -95,10 +99,10 @@
 
             while (stack.Count > 0)
             {
-                Point current = stack.Pop();
+                System.Drawing.Point current = stack.Pop();
                 dfsMoves.Add(current); // 이동 시도 기록
 
-                if (current == new Point(width - 1, height - 1))
+                if (current == new System.Drawing.Point(width - 1, height - 1))
                     break;
 
                 // DFS 특성상 우선순위를 섞고 싶다면 이곳에 Shuffle 도 가능
@@ -106,7 +110,7 @@
                 {
                     if (!mazeWalls[current.X, current.Y].isnotConnected[i] && !mazeWalls[current.X, current.Y].closedSides.Contains((MazeWall.Closed)i))
                     {
-                        Point next = new Point(current.X + directions[i].X, current.Y + directions[i].Y);
+                        System.Drawing.Point next = new System.Drawing.Point(current.X + directions[i].X, current.Y + directions[i].Y);
                         if (!visited.Contains(next))
                         {
                             stack.Push(next);
@@ -121,7 +125,7 @@
         }
 
 
-        Player SimulateMovement(Player player, List<Point> moveSequence, MazeWall[,] mazeWalls)
+        Player SimulateMovement(Player player, List<System.Drawing.Point> moveSequence, MazeWall[,] mazeWalls)
         {
             for (int moveIndex = 0; moveIndex < moveSequence.Count; moveIndex++)
             {
@@ -143,7 +147,7 @@
                     {
                         time[i]++; // 시간 증가
                         a++;
-                        Point nextLocation = player[i].Path[0];
+                        System.Drawing.Point nextLocation = player[i].Path[0];
                         player[i].Path.RemoveAt(0);
                         player[i].Location = nextLocation;
                         mazeWall[nextLocation.X, nextLocation.Y].playerOn(player[i].Color.R, player[i].Color.G, player[i].Color.B);
@@ -162,17 +166,17 @@
         void GenerateMaze(ref MazeWall[,] mazeWalls, int width, int height)
         {
             bool[,] visited = new bool[width, height];
-            Stack<Point> stack = new Stack<Point>();
+            Stack<System.Drawing.Point> stack = new Stack<System.Drawing.Point>();
             Random rand = new Random();
 
             // 시작점은 0,0 (또는 랜덤도 가능)
-            Point start = new Point(0, 0);
+            System.Drawing.Point start = new System.Drawing.Point(0, 0);
             stack.Push(start);
             visited[start.X, start.Y] = true;
 
             while (stack.Count > 0)
             {
-                Point current = stack.Peek();
+                System.Drawing.Point current = stack.Peek();
                 List<int> availableDirections = new List<int>();
 
                 for (int i = 0; i < 4; i++)
@@ -195,7 +199,7 @@
                     mazeWalls[nx, ny].removeclosed((MazeWall.Closed)((dir + 2) % 4));
 
                     visited[nx, ny] = true;
-                    stack.Push(new Point(nx, ny));
+                    stack.Push(new System.Drawing.Point(nx, ny));
                 }
                 else
                 {
@@ -271,7 +275,7 @@
                         mazeWall[i, j].isnotConnected[2] = true; // Bottom
                     }
                     mazeWall[i, j].Size = new Size(size, size);
-                    mazeWall[i, j].Location = new Point(i * size + Widthstart, j * size + Heightstart);
+                    mazeWall[i, j].Location = new System.Drawing.Point(i * size + Widthstart, j * size + Heightstart);
                     mazeWall[i, j].addAllWalls();
                     this.Controls.Add(mazeWall[i, j].pictureBox);
                 }
@@ -309,8 +313,8 @@
                 new Player(Color.Red),
                 new Player(Color.Blue)
             };
-            List<Point> bfs = StartBFS(players[0], mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value);
-            List<Point> dfs = StartDFS(players[1], mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value);
+            List<System.Drawing.Point> bfs = StartBFS(players[0], mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value);
+            List<System.Drawing.Point> dfs = StartDFS(players[1], mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value);
             players[0] = SimulateMovement(players[0], bfs, mazeWall);
             players[1] = SimulateMovement(players[1], dfs, mazeWall);
             players[0].Path.RemoveAt(0); // 시작 위치는 제외
@@ -319,25 +323,70 @@
             button2.Enabled = false;
             SimulateMove(players, (int)numericUpDown2.Value);
             button1.Enabled = true;
-            
+            Write_Excel();
+        }
+        
+        private void Write_Excel()
+        {
+            string excelFilePath = @"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\Maze_data.xlsx"; // string으로 저장된 엑셀 경로
+
+            Excel.Application excelApp = new Excel.Application();
+            Excel.Workbook workbook = null;
+            Excel.Worksheet worksheet = null;
+
+            try
+            {
+                workbook = excelApp.Workbooks.Open(excelFilePath);
+                worksheet = workbook.Sheets[1] as Excel.Worksheet; // 첫 번째 시트
+
+                // 현재 사용 중인 마지막 행 찾기
+                int lastRow = worksheet.Cells.Find(
+                    "*", worksheet.Cells[1, 1],
+                    Excel.XlFindLookIn.xlFormulas,
+                    Excel.XlLookAt.xlPart,
+                    Excel.XlSearchOrder.xlByRows,
+                    Excel.XlSearchDirection.xlPrevious,
+                    false, Type.Missing, Type.Missing)?.Row ?? 0;
+
+                // 추가할 4개의 데이터
+                worksheet.Cells[lastRow + 1, 1] = numericUpDown1.Value;
+                worksheet.Cells[lastRow + 1, 2] = numericUpDown2.Value;
+                worksheet.Cells[lastRow + 1, 3] = label1.Text.Split(" ")[2];
+                worksheet.Cells[lastRow + 1, 4] = label2.Text.Split(" ")[2];
+
+                workbook.Save();
+            }
+            finally
+            {
+                if (workbook != null)
+                {
+                    workbook.Close(false);
+                    Marshal.ReleaseComObject(workbook);
+                }
+                if (excelApp != null)
+                {
+                    excelApp.Quit();
+                    Marshal.ReleaseComObject(excelApp);
+                }
+            }
         }
     }
 
     class Player
     {
-        public Point Location { get; set; }
+        public System.Drawing.Point Location { get; set; }
         public Color Color { get; set; }
-        public List<Point> Path { get; set; } = new List<Point>();
+        public List<System.Drawing.Point> Path { get; set; } = new List<System.Drawing.Point>();
         public Player(Color color)
         {
             Color = color;
-            Location = new Point(0, 0); // 초기 위치 (0, 0)로 설정
+            Location = new System.Drawing.Point(0, 0); // 초기 위치 (0, 0)로 설정
         }
-        public void Move(Point newLocation, MazeWall[,] mazeWalls)
+        public void Move(System.Drawing.Point newLocation, MazeWall[,] mazeWalls)
         {
-            Dictionary<Point, Point?> parent = new Dictionary<Point, Point?>();
-            Queue<Point> queue = new Queue<Point>();
-            HashSet<Point> visited = new HashSet<Point>();
+            Dictionary<System.Drawing.Point, System.Drawing.Point?> parent = new Dictionary<System.Drawing.Point, System.Drawing.Point?>();
+            Queue<System.Drawing.Point> queue = new Queue<System.Drawing.Point>();
+            HashSet<System.Drawing.Point> visited = new HashSet<System.Drawing.Point>();
 
             queue.Enqueue(Location);
             visited.Add(Location);
@@ -345,7 +394,7 @@
 
             while (queue.Count > 0)
             {
-                Point current = queue.Dequeue();
+                System.Drawing.Point current = queue.Dequeue();
 
                 if (current == newLocation)
                 {
@@ -353,19 +402,19 @@
                 }
 
                 // 상, 우, 하, 좌 순서
-                Point[] directions = new Point[]
+                System.Drawing.Point[] directions = new System.Drawing.Point[]
                 {
-                    new Point(0, -1), // 상
-                    new Point(1, 0),  // 우
-                    new Point(0, 1),  // 하
-                    new Point(-1, 0)  // 좌
+                    new System.Drawing.Point(0, -1), // 상
+                    new System.Drawing.Point(1, 0),  // 우
+                    new System.Drawing.Point(0, 1),  // 하
+                    new System.Drawing.Point(-1, 0)  // 좌
                 };
 
                 for (int i = 0; i < 4; i++)
                 {
                     if (!mazeWalls[current.X, current.Y].isnotConnected[i] && !mazeWalls[current.X, current.Y].closedSides.Contains((MazeWall.Closed)i))
                     {
-                        Point next = new Point(current.X + directions[i].X, current.Y + directions[i].Y);
+                        System.Drawing.Point next = new System.Drawing.Point(current.X + directions[i].X, current.Y + directions[i].Y);
                         if (!visited.Contains(next))
                         {
                             queue.Enqueue(next);
@@ -377,8 +426,8 @@
             }
 
             // 경로를 역추적
-            Point? trace = newLocation;
-            Stack<Point> reversedPath = new Stack<Point>();
+            System.Drawing.Point? trace = newLocation;
+            Stack<System.Drawing.Point> reversedPath = new Stack<System.Drawing.Point>();
             while (trace != null)
             {
                 reversedPath.Push(trace.Value);
@@ -387,7 +436,7 @@
 
             while (reversedPath.Count > 0)
             {
-                if(reversedPath.Peek() == Location && reversedPath.Peek() != new Point(0, 0))
+                if(reversedPath.Peek() == Location && reversedPath.Peek() != new System.Drawing.Point(0, 0))
                 {
                     reversedPath.Pop(); // 현재 위치는 제외
                 }
@@ -424,7 +473,7 @@
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
         }
-        public Point Location
+        public System.Drawing.Point Location
         {
             get { return pictureBox.Location; }
             set { pictureBox.Location = value; }
@@ -456,24 +505,24 @@
                 using (Pen thickPen = new Pen(Color.Gray, 40)) // 회색, 40픽셀 두께
                 {
                     if (closed == Closed.Top)
-                        g.DrawLine(thickPen, new Point(0, 20), new Point(800, 20));
+                        g.DrawLine(thickPen, new System.Drawing.Point(0, 20), new System.Drawing.Point(800, 20));
                     else if (closed == Closed.Right)
-                        g.DrawLine(thickPen, new Point(780, 0), new Point(780, 800));
+                        g.DrawLine(thickPen, new System.Drawing.Point(780, 0), new System.Drawing.Point(780, 800));
                     else if (closed == Closed.Bottom)
-                        g.DrawLine(thickPen, new Point(0, 780), new Point(800, 780));
+                        g.DrawLine(thickPen, new System.Drawing.Point(0, 780), new System.Drawing.Point(800, 780));
                     else if (closed == Closed.Left)
-                        g.DrawLine(thickPen, new Point(20, 0), new Point(20, 800));
+                        g.DrawLine(thickPen, new System.Drawing.Point(20, 0), new System.Drawing.Point(20, 800));
                 }
                 using (Pen thickPen = new Pen(Color.Gray, 40)) // 회색, 40픽셀 두께
                 {
                     if (closed == Closed.Top && isnotConnected[0])
-                        g.DrawLine(thickPen, new Point(0, 60), new Point(800, 60));
+                        g.DrawLine(thickPen, new System.Drawing.Point(0, 60), new System.Drawing.Point(800, 60));
                     else if (closed == Closed.Right && isnotConnected[1])
-                        g.DrawLine(thickPen, new Point(740, 0), new Point(740, 800));
+                        g.DrawLine(thickPen, new System.Drawing.Point(740, 0), new System.Drawing.Point(740, 800));
                     else if (closed == Closed.Bottom && isnotConnected[2])
-                        g.DrawLine(thickPen, new Point(0, 740), new Point(800, 740));
+                        g.DrawLine(thickPen, new System.Drawing.Point(0, 740), new System.Drawing.Point(800, 740));
                     else if (closed == Closed.Left && isnotConnected[3])
-                        g.DrawLine(thickPen, new Point(60, 0), new Point(60, 800));
+                        g.DrawLine(thickPen, new System.Drawing.Point(60, 0), new System.Drawing.Point(60, 800));
                 }
 
             }
@@ -512,13 +561,13 @@
                     foreach (var side in closedSides)
                     {
                         if (side == Closed.Top)
-                            g.DrawLine(thickPen, new Point(0, 20), new Point(800, 20));
+                            g.DrawLine(thickPen, new System.Drawing.Point(0, 20), new System.Drawing.Point(800, 20));
                         else if (side == Closed.Right)
-                            g.DrawLine(thickPen, new Point(780, 0), new Point(780, 800));
+                            g.DrawLine(thickPen, new System.Drawing.Point(780, 0), new System.Drawing.Point(780, 800));
                         else if (side == Closed.Bottom)
-                            g.DrawLine(thickPen, new Point(0, 780), new Point(800, 780));
+                            g.DrawLine(thickPen, new System.Drawing.Point(0, 780), new System.Drawing.Point(800, 780));
                         else if (side == Closed.Left)
-                            g.DrawLine(thickPen, new Point(20, 0), new Point(20, 800));
+                            g.DrawLine(thickPen, new System.Drawing.Point(20, 0), new System.Drawing.Point(20, 800));
                     }
                 }
                 using (Pen thickPen = new Pen(Color.Gray, 40)) // 회색, 40픽셀 두께
@@ -526,13 +575,13 @@
                     foreach (var side in closedSides)
                     {
                         if (side == Closed.Top && isnotConnected[0])
-                            g.DrawLine(thickPen, new Point(0, 60), new Point(800, 60));
+                            g.DrawLine(thickPen, new System.Drawing.Point(0, 60), new System.Drawing.Point(800, 60));
                         else if (side == Closed.Right && isnotConnected[1])
-                            g.DrawLine(thickPen, new Point(740, 0), new Point(740, 800));
+                            g.DrawLine(thickPen, new System.Drawing.Point(740, 0), new System.Drawing.Point(740, 800));
                         else if (side == Closed.Bottom && isnotConnected[2])
-                            g.DrawLine(thickPen, new Point(0, 740), new Point(800, 740));
+                            g.DrawLine(thickPen, new System.Drawing.Point(0, 740), new System.Drawing.Point(800, 740));
                         else if (side == Closed.Left && isnotConnected[3])
-                            g.DrawLine(thickPen, new Point(60, 0), new Point(60, 800));
+                            g.DrawLine(thickPen, new System.Drawing.Point(60, 0), new System.Drawing.Point(60, 800));
                     }
                 }
 
