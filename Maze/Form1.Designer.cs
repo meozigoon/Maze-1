@@ -36,8 +36,14 @@
             label3 = new Label();
             label4 = new Label();
             numericUpDown2 = new NumericUpDown();
+            label5 = new Label();
+            label6 = new Label();
+            button3 = new Button();
+            numericUpDown3 = new NumericUpDown();
+            label7 = new Label();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
             SuspendLayout();
             // 
             // numericUpDown1
@@ -127,12 +133,70 @@
             numericUpDown2.TabIndex = 7;
             numericUpDown2.Value = new decimal(new int[] { 100, 0, 0, 0 });
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(9, 165);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(54, 25);
+            label5.TabIndex = 9;
+            label5.Text = "Loop";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(9, 190);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(57, 25);
+            label6.TabIndex = 10;
+            label6.Text = "n = 2";
+            // 
+            // button3
+            // 
+            button3.Location = new Point(9, 258);
+            button3.Margin = new Padding(2);
+            button3.Name = "button3";
+            button3.Size = new Size(90, 36);
+            button3.TabIndex = 11;
+            button3.Text = "Go";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // numericUpDown3
+            // 
+            numericUpDown3.Location = new Point(9, 217);
+            numericUpDown3.Margin = new Padding(2);
+            numericUpDown3.Maximum = new decimal(new int[] { 80, 0, 0, 0 });
+            numericUpDown3.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
+            numericUpDown3.Name = "numericUpDown3";
+            numericUpDown3.Size = new Size(90, 31);
+            numericUpDown3.TabIndex = 12;
+            numericUpDown3.Value = new decimal(new int[] { 10, 0, 0, 0 });
+            numericUpDown3.KeyDown += numericUpDown3_KeyDown;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(9, 296);
+            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(83, 25);
+            label7.TabIndex = 13;
+            label7.Text = "횟수 = 0";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1062, 570);
+            Controls.Add(label7);
+            Controls.Add(numericUpDown3);
+            Controls.Add(button3);
+            Controls.Add(label6);
+            Controls.Add(label5);
             Controls.Add(numericUpDown2);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -147,6 +211,7 @@
             SizeChanged += Form1_SizeChanged;
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -161,5 +226,10 @@
         private Label label3;
         private Label label4;
         private NumericUpDown numericUpDown2;
+        private Label label5;
+        private Label label6;
+        private Button button3;
+        private NumericUpDown numericUpDown3;
+        private Label label7;
     }
 }

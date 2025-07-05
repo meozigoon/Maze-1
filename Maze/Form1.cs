@@ -300,6 +300,7 @@
             {
                 numericUpDown1.Value = 2;
             }
+            label6.Text = "n = " + numericUpDown1.Value.ToString();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -343,6 +344,35 @@
             else if (e.KeyCode == Keys.Space)
             {
                 button2.PerformClick(); // Space 키를 누르면 버튼 클릭 이벤트 발생
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            button1.Enabled = false;
+            button3.Enabled = false;
+            numericUpDown1.Enabled = false;
+            numericUpDown2.Enabled = false;
+            numericUpDown3.Enabled = false;
+            for (int i = 0; i < numericUpDown3.Value; i++)
+            {
+                button1.PerformClick();
+                button2.PerformClick();
+                label7.Text = "횟수 = " + (i + 1).ToString();
+            }
+            button1.Enabled = true;
+            button3.Enabled = true;
+            numericUpDown1.Enabled = true;
+            numericUpDown2.Enabled = true;
+            numericUpDown3.Enabled = true;
+            label7.Text = "횟수 = 0";
+        }
+
+        private void numericUpDown3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button3.PerformClick(); // Enter 키를 누르면 버튼 클릭 이벤트 발생
             }
         }
     }
