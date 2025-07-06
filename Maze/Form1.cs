@@ -355,9 +355,9 @@
             numericUpDown3.Enabled = false;
             for (int i = 0; i < numericUpDown3.Value; i++)
             {
+                label7.Text = "횟수 = " + (i + 1).ToString();
                 button1.PerformClick();
                 button2.PerformClick();
-                label7.Text = "횟수 = " + (i + 1).ToString();
             }
             button3.Enabled = true;
             numericUpDown1.Enabled = true;
