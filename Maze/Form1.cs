@@ -370,7 +370,7 @@
         {
             if (e.KeyCode == Keys.Enter)
             {
-                button3.PerformClick(); // Enter 키를 누르면 버튼 클릭 이벤트 발생
+                button3.PerformClick();
             }
         }
     }
