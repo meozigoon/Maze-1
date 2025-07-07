@@ -1,4 +1,4 @@
-> project for simulating BFS and DFS similar to real life
+> project for simulating BFS and DFS similar to real life condition
 
 ## how this works
 1. creates maze using DFS Backtraking
