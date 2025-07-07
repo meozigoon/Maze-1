@@ -46,6 +46,8 @@
             label10 = new Label();
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
+            button5 = new Button();
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
@@ -249,12 +251,34 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "2nd";
             // 
+            // button5
+            // 
+            button5.Location = new Point(9, 39);
+            button5.Name = "button5";
+            button5.Size = new Size(98, 34);
+            button5.TabIndex = 21;
+            button5.Text = "기록 OFF";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(112, 44);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(48, 25);
+            label5.TabIndex = 22;
+            label5.Text = "True";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1062, 570);
+            Controls.Add(label5);
+            Controls.Add(button5);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(numericUpDown2);
@@ -300,5 +324,7 @@
         private Label label10;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
+        private Button button5;
+        private Label label5;
     }
 }

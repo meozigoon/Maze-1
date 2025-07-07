@@ -3,7 +3,8 @@
     public partial class Form1 : Form
     {
         MazeWall[,] mazeWall;
-        bool isSecond = false; // 2차 진행
+        bool isSecond = false;
+        bool isWrite = true;
         HashSet<Point> prevBfsVisited = new HashSet<Point>();
         HashSet<Point> prevDfsVisited = new HashSet<Point>();
 
@@ -445,13 +446,16 @@
             }
             SimulateMove(players, (int)numericUpDown2.Value);
 
-            if (!isSecond)
+            if (isWrite)
             {
-                Write_CSV(@"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\maze\maze_data.csv");
-            }
-            else
-            {
-                Write_CSV(@"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\maze\2_maze_data.csv");
+                if (!isSecond)
+                {
+                    Write_CSV(@"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\maze\maze_data.csv");
+                }
+                else
+                {
+                    Write_CSV(@"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\maze\2_maze_data.csv");
+                }
             }
             button1.Enabled = true;
         }
@@ -519,6 +523,13 @@
             isSecond = !isSecond;
             button4.Text = "2차 " + (isSecond ? "OFF" : "ON");
             label8.Text = isSecond.ToString();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            isWrite = !isWrite;
+            button5.Text = "기록 " + (isWrite ? "OFF" : "ON");
+            label5.Text = isWrite.ToString();
         }
     }
 

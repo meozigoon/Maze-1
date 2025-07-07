@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dongha Lee\\source\\repos\\Maze-1\\Maze\\Maze.csproj": {}
+    "C:\\Users\\Dongha Lee\\Source\\Repos\\Maze-1\\Maze\\Maze.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dongha Lee\\source\\repos\\Maze-1\\Maze\\Maze.csproj": {
+    "C:\\Users\\Dongha Lee\\Source\\Repos\\Maze-1\\Maze\\Maze.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dongha Lee\\source\\repos\\Maze-1\\Maze\\Maze.csproj",
+        "projectUniqueName": "C:\\Users\\Dongha Lee\\Source\\Repos\\Maze-1\\Maze\\Maze.csproj",
         "projectName": "Maze",
-        "projectPath": "C:\\Users\\Dongha Lee\\source\\repos\\Maze-1\\Maze\\Maze.csproj",
+        "projectPath": "C:\\Users\\Dongha Lee\\Source\\Repos\\Maze-1\\Maze\\Maze.csproj",
         "packagesPath": "C:\\Users\\Dongha Lee\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Dongha Lee\\Source\\Repos\\Maze-1\\Maze\\obj\\",
         "projectStyle": "PackageReference",
