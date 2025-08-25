@@ -225,6 +225,110 @@
             return dfsMoves;
         }
 
+        List<Point> StartAStar(Player player, MazeWall[,] mazeWalls, int width, int height)
+        {
+            Point start = player.Location;
+            Point goal = new Point(width - 1, height - 1);
+            PriorityQueue<Point, int> open = new PriorityQueue<Point, int>();
+            Dictionary<Point, Point?> cameFrom = new Dictionary<Point, Point?>();
+            Dictionary<Point, int> gScore = new Dictionary<Point, int>();
+
+            open.Enqueue(start, 0);
+            gScore[start] = 0;
+
+            while (open.Count > 0)
+            {
+                Point current = open.Dequeue();
+                if (current == goal)
+                    break;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    if (!mazeWalls[current.X, current.Y].isnotConnected[i] && !mazeWalls[current.X, current.Y].closedSides.Contains((MazeWall.Closed)i))
+                    {
+                        Point next = new Point(current.X + directions[i].X, current.Y + directions[i].Y);
+                        int tentativeG = gScore[current] + 1;
+                        if (!gScore.ContainsKey(next) || tentativeG < gScore[next])
+                        {
+                            cameFrom[next] = current;
+                            gScore[next] = tentativeG;
+                            int f = tentativeG + Math.Abs(goal.X - next.X) + Math.Abs(goal.Y - next.Y);
+                            open.Enqueue(next, f);
+                        }
+                    }
+                }
+            }
+
+            List<Point> path = new List<Point>();
+            Point? trace = goal;
+            while (trace != null && cameFrom.ContainsKey(trace.Value))
+            {
+                path.Add(trace.Value);
+                trace = cameFrom[trace.Value];
+            }
+            path.Add(start);
+            path.Reverse();
+            return path;
+        }
+
+        List<Point> StartFloodFill(Player player, MazeWall[,] mazeWalls, int width, int height)
+        {
+            Point start = player.Location;
+            Point goal = new Point(width - 1, height - 1);
+            Queue<Point> queue = new Queue<Point>();
+            Dictionary<Point, int> distance = new Dictionary<Point, int>();
+
+            queue.Enqueue(goal);
+            distance[goal] = 0;
+
+            while (queue.Count > 0)
+            {
+                Point current = queue.Dequeue();
+                for (int i = 0; i < 4; i++)
+                {
+                    if (!mazeWalls[current.X, current.Y].isnotConnected[i] && !mazeWalls[current.X, current.Y].closedSides.Contains((MazeWall.Closed)i))
+                    {
+                        Point next = new Point(current.X + directions[i].X, current.Y + directions[i].Y);
+                        if (!distance.ContainsKey(next))
+                        {
+                            distance[next] = distance[current] + 1;
+                            queue.Enqueue(next);
+                        }
+                    }
+                }
+            }
+
+            List<Point> path = new List<Point>();
+            if (!distance.ContainsKey(start))
+            {
+                path.Add(start);
+                return path;
+            }
+            Point cur = start;
+            path.Add(cur);
+            while (cur != goal)
+            {
+                Point next = cur;
+                int best = int.MaxValue;
+                for (int i = 0; i < 4; i++)
+                {
+                    if (!mazeWalls[cur.X, cur.Y].isnotConnected[i] && !mazeWalls[cur.X, cur.Y].closedSides.Contains((MazeWall.Closed)i))
+                    {
+                        Point n = new Point(cur.X + directions[i].X, cur.Y + directions[i].Y);
+                        if (distance.TryGetValue(n, out int d) && d < best)
+                        {
+                            best = d;
+                            next = n;
+                        }
+                    }
+                }
+                if (next == cur) break;
+                path.Add(next);
+                cur = next;
+            }
+            return path;
+        }
+
         Player SimulateMovement(Player player, List<Point> moveSequence, MazeWall[,] mazeWalls)
         {
             for (int moveIndex = 0; moveIndex < moveSequence.Count; moveIndex++)
@@ -235,41 +339,33 @@
             return player;
         }
 
-        void SimulateMove(List<Player> player, int clock)
+        void SimulateMove(List<(Player player, Label label, string prefix)> players, int clock)
         {
-            int[] time = new int[player.Count];
+            int[] time = new int[players.Count];
             while (true)
             {
                 int a = 0;
-                for (int i = 0; i < player.Count; i++)
+                for (int i = 0; i < players.Count; i++)
                 {
-                    if (player[i].Path.Count > 0)
+                    if (players[i].player.Path.Count > 0)
                     {
-                        time[i]++; // 시간 증가
+                        time[i]++;
                         a++;
-                        Point nextLocation = player[i].Path[0];
-                        player[i].Path.RemoveAt(0);
-                        player[i].Location = nextLocation;
-                        mazeWall[nextLocation.X, nextLocation.Y].playerOn(player[i].Color.R, player[i].Color.G, player[i].Color.B);
+                        Point nextLocation = players[i].player.Path[0];
+                        players[i].player.Path.RemoveAt(0);
+                        players[i].player.Location = nextLocation;
+                        mazeWall[nextLocation.X, nextLocation.Y].playerOn(players[i].player.Color.R, players[i].player.Color.G, players[i].player.Color.B);
                     }
                 }
-                Delay(clock); // 0.5초 대기
+                Delay(clock);
                 if (a == 0)
                 {
-                    label1.Text = "BFS : " + time[0] * clock / 1000.0 + " s";
-                    label2.Text = "DFS : " + time[1] * clock / 1000.0 + " s";
-                    if (isSecond)
-                    {
-                        label10.Text = "BFS : " + time[2] * clock / 1000.0 + " s";
-                        label9.Text = "DFS : " + time[3] * clock / 1000.0 + " s";
-                    }
-                    else
-                    {
-                        label10.Text = "BFS : ";
-                        label9.Text = "DFS : ";
-                    }
-                    break; // 모든 플레이어가 이동할 수 없을 때 종료
+                    break;
                 }
+            }
+            for (int i = 0; i < players.Count; i++)
+            {
+                players[i].label.Text = players[i].prefix + time[i] * clock / 1000.0 + " s";
             }
         }
 
@@ -419,32 +515,101 @@
 
         private void button2_Click(object sender, EventArgs e)
         {
-            List<Player> players = new List<Player>
+            var players = new List<(Player player, Label label, string prefix)>();
+
+            if (checkBoxBFS.Checked)
             {
-                new Player(Color.Red),
-                new Player(Color.Blue)
-            };
-            List<Point> bfs = StartBFS(players[0], mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value);
-            List<Point> dfs = StartDFS(players[1], mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value);
-            players[0] = SimulateMovement(players[0], bfs, mazeWall);
-            players[1] = SimulateMovement(players[1], dfs, mazeWall);
-            players[0].Path.RemoveAt(0); // 시작 위치는 제외
-            players[1].Path.RemoveAt(0); // 시작 위치는 제외
+                var p = new Player(Color.Red);
+                var path = StartBFS(p, mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value);
+                p = SimulateMovement(p, path, mazeWall);
+                p.Path.RemoveAt(0);
+                players.Add((p, label1, "BFS : "));
+            }
+            else
+            {
+                label1.Text = "BFS : OFF";
+            }
+
+            if (checkBoxDFS.Checked)
+            {
+                var p = new Player(Color.Blue);
+                var path = StartDFS(p, mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value);
+                p = SimulateMovement(p, path, mazeWall);
+                p.Path.RemoveAt(0);
+                players.Add((p, label2, "DFS : "));
+            }
+            else
+            {
+                label2.Text = "DFS : OFF";
+            }
+
+            if (checkBoxAStar.Checked)
+            {
+                var p = new Player(Color.Green);
+                var path = StartAStar(p, mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value);
+                p = SimulateMovement(p, path, mazeWall);
+                p.Path.RemoveAt(0);
+                players.Add((p, label11, "A* : "));
+            }
+            else
+            {
+                label11.Text = "A* : OFF";
+            }
+
+            if (checkBoxFlood.Checked)
+            {
+                var p = new Player(Color.Gray);
+                var path = StartFloodFill(p, mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value);
+                p = SimulateMovement(p, path, mazeWall);
+                p.Path.RemoveAt(0);
+                players.Add((p, label12, "FLOOD : "));
+            }
+            else
+            {
+                label12.Text = "FLOOD : OFF";
+            }
+
             button1.Enabled = false;
             button2.Enabled = false;
 
             if (isSecond)
             {
-                players.Add(new Player(Color.Red));
-                players.Add(new Player(Color.Blue));
-                List<Point> bfs2 = Start2ndBFS(players[2], mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value, prevDfsVisited);
-                List<Point> dfs2 = Start2ndDFS(players[3], mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value, prevBfsVisited);
-                players[2] = SimulateMovement(players[2], bfs2, mazeWall);
-                players[3] = SimulateMovement(players[3], dfs2, mazeWall);
-                players[2].Path.RemoveAt(0); // 시작 위치는 제외
-                players[3].Path.RemoveAt(0); // 시작 위치는 제외
+                if (checkBoxBFS.Checked)
+                {
+                    var p2 = new Player(Color.Red);
+                    var path2 = Start2ndBFS(p2, mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value, prevDfsVisited);
+                    p2 = SimulateMovement(p2, path2, mazeWall);
+                    p2.Path.RemoveAt(0);
+                    players.Add((p2, label10, "BFS : "));
+                }
+                else
+                {
+                    label10.Text = "BFS : OFF";
+                }
+
+                if (checkBoxDFS.Checked)
+                {
+                    var p2 = new Player(Color.Blue);
+                    var path2 = Start2ndDFS(p2, mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value, prevBfsVisited);
+                    p2 = SimulateMovement(p2, path2, mazeWall);
+                    p2.Path.RemoveAt(0);
+                    players.Add((p2, label9, "DFS : "));
+                }
+                else
+                {
+                    label9.Text = "DFS : OFF";
+                }
             }
-            SimulateMove(players, (int)numericUpDown2.Value);
+            else
+            {
+                label10.Text = "BFS : ";
+                label9.Text = "DFS : ";
+            }
+
+            if (players.Count > 0)
+            {
+                SimulateMove(players, (int)numericUpDown2.Value);
+            }
 
             if (isWrite)
             {
@@ -467,16 +632,29 @@
                 return;
             }
 
-            decimal[] rowData = { (int)numericUpDown1.Value, (int)numericUpDown2.Value, decimal.Parse(label1.Text.Split(" ")[2]), decimal.Parse(label2.Text.Split(" ")[2]) }; ;
+            decimal[] rowData = { (int)numericUpDown1.Value, (int)numericUpDown2.Value,
+                ExtractTime(label1), ExtractTime(label2), ExtractTime(label11), ExtractTime(label12) };
             if (isSecond)
             {
-                rowData = new decimal[] { (int)numericUpDown1.Value, (int)numericUpDown2.Value, decimal.Parse(label1.Text.Split(" ")[2]), decimal.Parse(label2.Text.Split(" ")[2]), decimal.Parse(label10.Text.Split(" ")[2]), decimal.Parse(label9.Text.Split(" ")[2]) };
+                rowData = new decimal[] { (int)numericUpDown1.Value, (int)numericUpDown2.Value,
+                    ExtractTime(label1), ExtractTime(label2), ExtractTime(label11), ExtractTime(label12),
+                    ExtractTime(label10), ExtractTime(label9) };
             }
 
             using (StreamWriter sw = new StreamWriter(csvFilePath, append: true))
             {
                 sw.WriteLine(string.Join(",", rowData));
             }
+        }
+
+        private decimal ExtractTime(Label label)
+        {
+            var parts = label.Text.Split(' ');
+            if (parts.Length >= 3 && decimal.TryParse(parts[2], out decimal value))
+            {
+                return value;
+            }
+            return 0;
         }
 
         private void numericUpDown1_KeyDown(object sender, KeyEventArgs e)

@@ -33,6 +33,12 @@
             button2 = new Button();
             label1 = new Label();
             label2 = new Label();
+            label11 = new Label();
+            label12 = new Label();
+            checkBoxBFS = new CheckBox();
+            checkBoxDFS = new CheckBox();
+            checkBoxAStar = new CheckBox();
+            checkBoxFlood = new CheckBox();
             label3 = new Label();
             label4 = new Label();
             numericUpDown2 = new NumericUpDown();
@@ -102,7 +108,7 @@
             label1.Text = "BFS : ";
             // 
             // label2
-            // 
+            //
             label2.AutoSize = true;
             label2.Location = new Point(9, 116);
             label2.Margin = new Padding(2, 0, 2, 0);
@@ -110,6 +116,74 @@
             label2.Size = new Size(60, 25);
             label2.TabIndex = 4;
             label2.Text = "DFS : ";
+            //
+            // label11
+            //
+            label11.AutoSize = true;
+            label11.Location = new Point(150, 84);
+            label11.Margin = new Padding(2, 0, 2, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(54, 25);
+            label11.TabIndex = 23;
+            label11.Text = "A* : ";
+            //
+            // label12
+            //
+            label12.AutoSize = true;
+            label12.Location = new Point(150, 116);
+            label12.Margin = new Padding(2, 0, 2, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(92, 25);
+            label12.TabIndex = 24;
+            label12.Text = "FLOOD : ";
+            //
+            // checkBoxBFS
+            //
+            checkBoxBFS.AutoSize = true;
+            checkBoxBFS.Checked = true;
+            checkBoxBFS.CheckState = CheckState.Checked;
+            checkBoxBFS.Location = new Point(580, 50);
+            checkBoxBFS.Name = "checkBoxBFS";
+            checkBoxBFS.Size = new Size(68, 29);
+            checkBoxBFS.TabIndex = 25;
+            checkBoxBFS.Text = "BFS";
+            checkBoxBFS.UseVisualStyleBackColor = true;
+            //
+            // checkBoxDFS
+            //
+            checkBoxDFS.AutoSize = true;
+            checkBoxDFS.Checked = true;
+            checkBoxDFS.CheckState = CheckState.Checked;
+            checkBoxDFS.Location = new Point(580, 80);
+            checkBoxDFS.Name = "checkBoxDFS";
+            checkBoxDFS.Size = new Size(70, 29);
+            checkBoxDFS.TabIndex = 26;
+            checkBoxDFS.Text = "DFS";
+            checkBoxDFS.UseVisualStyleBackColor = true;
+            //
+            // checkBoxAStar
+            //
+            checkBoxAStar.AutoSize = true;
+            checkBoxAStar.Checked = true;
+            checkBoxAStar.CheckState = CheckState.Checked;
+            checkBoxAStar.Location = new Point(680, 50);
+            checkBoxAStar.Name = "checkBoxAStar";
+            checkBoxAStar.Size = new Size(68, 29);
+            checkBoxAStar.TabIndex = 27;
+            checkBoxAStar.Text = "A*";
+            checkBoxAStar.UseVisualStyleBackColor = true;
+            //
+            // checkBoxFlood
+            //
+            checkBoxFlood.AutoSize = true;
+            checkBoxFlood.Checked = true;
+            checkBoxFlood.CheckState = CheckState.Checked;
+            checkBoxFlood.Location = new Point(680, 80);
+            checkBoxFlood.Name = "checkBoxFlood";
+            checkBoxFlood.Size = new Size(89, 29);
+            checkBoxFlood.TabIndex = 28;
+            checkBoxFlood.Text = "FLOOD";
+            checkBoxFlood.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -284,6 +358,12 @@
             Controls.Add(numericUpDown2);
             Controls.Add(label4);
             Controls.Add(label3);
+            Controls.Add(checkBoxFlood);
+            Controls.Add(checkBoxAStar);
+            Controls.Add(checkBoxDFS);
+            Controls.Add(checkBoxBFS);
+            Controls.Add(label12);
+            Controls.Add(label11);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(button2);
@@ -322,6 +402,12 @@
         private Label label8;
         private Label label9;
         private Label label10;
+        private Label label11;
+        private Label label12;
+        private CheckBox checkBoxBFS;
+        private CheckBox checkBoxDFS;
+        private CheckBox checkBoxAStar;
+        private CheckBox checkBoxFlood;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private Button button5;
