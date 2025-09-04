@@ -2,7 +2,7 @@
 {
     public partial class Maze : Form
     {
-        MazeWall[,] mazeWall;
+        MazeWall[,] mazeWall = null!;
         bool isSecond = false;
         bool isWrite = false;
         HashSet<Point> prevBfsVisited = [];
@@ -265,17 +265,17 @@
                 Delay(clock); // 0.5초 대기
                 if (a == 0)
                 {
-                    label1.Text = "BFS : " + time[0] * clock / 1000.0 + " s";
-                    label2.Text = "DFS : " + time[1] * clock / 1000.0 + " s";
+                    BfsTimeLabel.Text = "BFS : " + time[0] * clock / 1000.0 + " s";
+                    DfsTimeLabel.Text = "DFS : " + time[1] * clock / 1000.0 + " s";
                     if (isSecond)
                     {
-                        label10.Text = "BFS : " + time[2] * clock / 1000.0 + " s";
-                        label9.Text = "DFS : " + time[3] * clock / 1000.0 + " s";
+                        Bfs2ndTimeLabel.Text = "BFS : " + time[2] * clock / 1000.0 + " s";
+                        Dfs2ndTimeLabel.Text = "DFS : " + time[3] * clock / 1000.0 + " s";
                     }
                     else
                     {
-                        label10.Text = "BFS : ";
-                        label9.Text = "DFS : ";
+                        Bfs2ndTimeLabel.Text = "BFS : ";
+                        Dfs2ndTimeLabel.Text = "DFS : ";
                     }
                     break; // 모든 플레이어가 이동할 수 없을 때 종료
                 }
@@ -296,7 +296,7 @@
             while (stack.Count > 0)
             {
                 Point current = stack.Peek();
-                List<int> availableDirections = new List<int>();
+                List<int> availableDirections = [];
 
                 for (int i = 0; i < 4; i++)
                 {
@@ -327,7 +327,7 @@
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void GenerateMazeButton_Click(object sender, EventArgs e)
         {
             if (mazeWall != null)
             {
@@ -336,22 +336,21 @@
                     this.Controls.Remove(wall.pictureBox);
                 }
             }
-            mazeWall = new MazeWall[(int)numericUpDown1.Value, (int)numericUpDown1.Value];
+            mazeWall = new MazeWall[(int)SizeNumericUpDown.Value, (int)SizeNumericUpDown.Value];
             int size;
-            int Heightstart = numericUpDown1.Location.Y + numericUpDown1.Size.Height + Size.Width / ((int)numericUpDown1.Value * 10);
             int Widthstart;
-
+            int Heightstart;
             if (Size.Width < Size.Height)
             {
-                size = 4 * Size.Width / ((int)numericUpDown1.Value * 5);
-                Heightstart = numericUpDown1.Location.Y + numericUpDown1.Size.Height + Size.Height / 10; 
-                Widthstart = Size.Width / 2 - Convert.ToInt32(size * (int)numericUpDown1.Value / 2.0);
+                size = 4 * Size.Width / ((int)SizeNumericUpDown.Value * 5);
+                Heightstart = SizeNumericUpDown.Location.Y + SizeNumericUpDown.Size.Height + Size.Height / 10;
+                Widthstart = Size.Width / 2 - Convert.ToInt32(size * (int)SizeNumericUpDown.Value / 2.0);
             }
             else
             {
-                size = 4 * (Size.Height - numericUpDown1.Location.Y - numericUpDown1.Size.Height) / ((int)numericUpDown1.Value * 5);
-                Heightstart = numericUpDown1.Location.Y + numericUpDown1.Size.Height + Size.Height / 10;
-                Widthstart = Size.Width / 2 - Convert.ToInt32(size * (int)numericUpDown1.Value / 2.0);
+                size = 4 * (Size.Height - SizeNumericUpDown.Location.Y - SizeNumericUpDown.Size.Height) / ((int)SizeNumericUpDown.Value * 5);
+                Heightstart = SizeNumericUpDown.Location.Y + SizeNumericUpDown.Size.Height + Size.Height / 10;
+                Widthstart = Size.Width / 2 - Convert.ToInt32(size * (int)SizeNumericUpDown.Value / 2.0);
             }
             for (int i = 0; i < mazeWall.GetLength(0); i++)
             {
@@ -400,11 +399,11 @@
                     this.Controls.Add(mazeWall[i, j].pictureBox);
                 }
             }
-            GenerateMaze(ref mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value);
-            button2.Enabled = true;
+            GenerateMaze(ref mazeWall, (int)SizeNumericUpDown.Value, (int)SizeNumericUpDown.Value);
+            RunButton.Enabled = true;
         }
 
-        private void Form1_SizeChanged(object sender, EventArgs e)
+        private void Maze_SizeChanged(object sender, EventArgs e)
         {
             if (this.Size.Width < 800)
             {
@@ -418,126 +417,126 @@
             }
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void SizeNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            if (numericUpDown1.Value < 2)
+            if (SizeNumericUpDown.Value < 2)
             {
-                numericUpDown1.Value = 2;
+                SizeNumericUpDown.Value = 2;
             }
-            label6.Text = "n = " + numericUpDown1.Value.ToString();
+            LoopLimitLabel.Text = "n = " + SizeNumericUpDown.Value.ToString();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void RunButton_Click(object sender, EventArgs e)
         {
             List<Player> players =
             [
                 new(Color.Red),
                 new(Color.Blue)
             ];
-            List<Point> bfs = StartBFS(players[0], mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value);
-            List<Point> dfs = StartDFS(players[1], mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value);
+            List<Point> bfs = StartBFS(players[0], mazeWall, (int)SizeNumericUpDown.Value, (int)SizeNumericUpDown.Value);
+            List<Point> dfs = StartDFS(players[1], mazeWall, (int)SizeNumericUpDown.Value, (int)SizeNumericUpDown.Value);
             players[0] = SimulateMovement(players[0], bfs, mazeWall);
             players[1] = SimulateMovement(players[1], dfs, mazeWall);
             players[0].Path.RemoveAt(0); // 시작 위치는 제외
             players[1].Path.RemoveAt(0); // 시작 위치는 제외
-            button1.Enabled = false;
-            button2.Enabled = false;
+            GenerateMazeButton.Enabled = false;
+            RunButton.Enabled = false;
 
             if (isSecond)
             {
                 players.Add(new Player(Color.Red));
                 players.Add(new Player(Color.Blue));
-                List<Point> bfs2 = Start2ndBFS(players[2], mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value, prevDfsVisited);
-                List<Point> dfs2 = Start2ndDFS(players[3], mazeWall, (int)numericUpDown1.Value, (int)numericUpDown1.Value, prevBfsVisited);
+                List<Point> bfs2 = Start2ndBFS(players[2], mazeWall, (int)SizeNumericUpDown.Value, (int)SizeNumericUpDown.Value, prevDfsVisited);
+                List<Point> dfs2 = Start2ndDFS(players[3], mazeWall, (int)SizeNumericUpDown.Value, (int)SizeNumericUpDown.Value, prevBfsVisited);
                 players[2] = SimulateMovement(players[2], bfs2, mazeWall);
                 players[3] = SimulateMovement(players[3], dfs2, mazeWall);
                 players[2].Path.RemoveAt(0); // 시작 위치는 제외
                 players[3].Path.RemoveAt(0); // 시작 위치는 제외
             }
-            SimulateMove(players, (int)numericUpDown2.Value);
+            SimulateMove(players, (int)StraightTimePenaltyNumericUpDown.Value);
 
             if (isWrite)
             {
                 if (!isSecond)
                 {
-                    Write_CSV(@"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\maze\maze_data.csv");
+                    WriteCsv(@"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\maze\maze_data.csv");
                 }
                 else
                 {
-                    Write_CSV(@"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\maze\2_maze_data.csv");
+                    WriteCsv(@"D:\이동하 Daniel\코딩&메이커\Team ToyoTech\maze\2_maze_data.csv");
                 }
             }
-            button1.Enabled = true;
+            GenerateMazeButton.Enabled = true;
         }
 
-        private void Write_CSV(string csvFilePath)
+        private void WriteCsv(string csvFilePath)
         {
             if (csvFilePath == null || csvFilePath == "")
             {
                 return;
             }
 
-            decimal[] rowData = { (int)numericUpDown1.Value, (int)numericUpDown2.Value, decimal.Parse(label1.Text.Split(" ")[2]), decimal.Parse(label2.Text.Split(" ")[2]) }; ;
+            decimal[] rowData = [(int)SizeNumericUpDown.Value, (int)StraightTimePenaltyNumericUpDown.Value, decimal.Parse(BfsTimeLabel.Text.Split(" ")[2]), decimal.Parse(DfsTimeLabel.Text.Split(" ")[2])]; ;
             if (isSecond)
             {
-                rowData = [(int)numericUpDown1.Value, (int)numericUpDown2.Value, decimal.Parse(label1.Text.Split(" ")[2]), decimal.Parse(label2.Text.Split(" ")[2]), decimal.Parse(label10.Text.Split(" ")[2]), decimal.Parse(label9.Text.Split(" ")[2])];
+                rowData = [(int)SizeNumericUpDown.Value, (int)StraightTimePenaltyNumericUpDown.Value, decimal.Parse(BfsTimeLabel.Text.Split(" ")[2]), decimal.Parse(DfsTimeLabel.Text.Split(" ")[2]), decimal.Parse(Bfs2ndTimeLabel.Text.Split(" ")[2]), decimal.Parse(Dfs2ndTimeLabel.Text.Split(" ")[2])];
             }
 
-            using StreamWriter sw = new StreamWriter(csvFilePath, append: true);
+            using StreamWriter sw = new(csvFilePath, append: true);
             sw.WriteLine(string.Join(",", rowData));
         }
 
-        private void numericUpDown1_KeyDown(object sender, KeyEventArgs e)
+        private void SizeNumericUpDown_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                button1.PerformClick(); // Enter 키를 누르면 버튼 클릭 이벤트 발생
+                GenerateMazeButton.PerformClick(); // Enter 키를 누르면 버튼 클릭 이벤트 발생
             }
             else if (e.KeyCode == Keys.Space)
             {
-                button2.PerformClick(); // Space 키를 누르면 버튼 클릭 이벤트 발생
+                RunButton.PerformClick(); // Space 키를 누르면 버튼 클릭 이벤트 발생
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void RunLoopButton_Click(object sender, EventArgs e)
         {
-            button3.Enabled = false;
-            numericUpDown1.Enabled = false;
-            numericUpDown2.Enabled = false;
-            numericUpDown3.Enabled = false;
-            for (int i = 0; i < numericUpDown3.Value; i++)
+            RunLoopButton.Enabled = false;
+            SizeNumericUpDown.Enabled = false;
+            StraightTimePenaltyNumericUpDown.Enabled = false;
+            LoopLimitNumericUpDown.Enabled = false;
+            for (int i = 0; i < LoopLimitNumericUpDown.Value; i++)
             {
-                label7.Text = "횟수 = " + (i + 1).ToString();
-                button1.PerformClick();
-                button2.PerformClick();
+                LoopCountLabel.Text = "횟수 = " + (i + 1).ToString();
+                GenerateMazeButton.PerformClick();
+                RunButton.PerformClick();
             }
-            button3.Enabled = true;
-            numericUpDown1.Enabled = true;
-            numericUpDown2.Enabled = true;
-            numericUpDown3.Enabled = true;
-            label7.Text = "횟수 = 0";
+            RunLoopButton.Enabled = true;
+            SizeNumericUpDown.Enabled = true;
+            StraightTimePenaltyNumericUpDown.Enabled = true;
+            LoopLimitNumericUpDown.Enabled = true;
+            LoopCountLabel.Text = "횟수 = 0";
         }
 
-        private void numericUpDown3_KeyDown(object sender, KeyEventArgs e)
+        private void LoopLimitNumericUpDown_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                button3.PerformClick();
+                RunLoopButton.PerformClick();
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Check2ndRunButton_Click(object sender, EventArgs e)
         {
             isSecond = !isSecond;
-            button4.Text = "2차 " + (isSecond ? "OFF" : "ON");
-            label8.Text = isSecond.ToString();
+            Check2ndRunButton.Text = "2차 " + (isSecond ? "OFF" : "ON");
+            Check2ndLabel.Text = isSecond.ToString();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void WriteButton_Click(object sender, EventArgs e)
         {
             isWrite = !isWrite;
-            button5.Text = "기록 " + (isWrite ? "OFF" : "ON");
-            label5.Text = isWrite.ToString();
+            WriteButton.Text = "기록 " + (isWrite ? "OFF" : "ON");
+            CheckWriteLabel.Text = isWrite.ToString();
         }
     }
 
@@ -601,7 +600,7 @@
 
             while (reversedPath.Count > 0)
             {
-                if(reversedPath.Peek() == Location && reversedPath.Peek() != new Point(0, 0))
+                if (reversedPath.Peek() == Location && reversedPath.Peek() != new Point(0, 0))
                 {
                     reversedPath.Pop(); // 현재 위치는 제외
                 }
@@ -672,41 +671,39 @@
                 // 2. 두꺼운 선 그리기
                 using (Pen thickPen = new(Color.Gray, 40)) // 회색, 40픽셀 두께
                 {
-                    if (closed == Closed.Top)
+                    switch (closed)
                     {
-                        g.DrawLine(thickPen, new(0, 20), new(800, 20));
-                    }
-                    else if (closed == Closed.Right)
-                    {
-                        g.DrawLine(thickPen, new(780, 0), new(780, 800));
-                    }
-                    else if (closed == Closed.Bottom)
-                    {
-                        g.DrawLine(thickPen, new(0, 780), new(800, 780));
-                    }
-                    else if (closed == Closed.Left)
-                    {
-                        g.DrawLine(thickPen, new(20, 0), new(20, 800));
+                        case Closed.Top:
+                            g.DrawLine(thickPen, new(0, 20), new(800, 20));
+                            break;
+                        case Closed.Right:
+                            g.DrawLine(thickPen, new(780, 0), new(780, 800));
+                            break;
+                        case Closed.Bottom:
+                            g.DrawLine(thickPen, new(0, 780), new(800, 780));
+                            break;
+                        case Closed.Left:
+                            g.DrawLine(thickPen, new(20, 0), new(20, 800));
+                            break;
                     }
                 }
 
                 using (Pen thickPen = new(Color.Gray, 40)) // 회색, 40픽셀 두께
                 {
-                    if (closed == Closed.Top && isnotConnected[0])
+                    switch (closed)
                     {
-                        g.DrawLine(thickPen, new(0, 60), new(800, 60));
-                    }
-                    else if (closed == Closed.Right && isnotConnected[1])
-                    {
-                        g.DrawLine(thickPen, new(740, 0), new(740, 800));
-                    }
-                    else if (closed == Closed.Bottom && isnotConnected[2])
-                    {
-                        g.DrawLine(thickPen, new(0, 740), new(800, 740));
-                    }
-                    else if (closed == Closed.Left && isnotConnected[3])
-                    {
-                        g.DrawLine(thickPen, new(60, 0), new(60, 800));
+                        case Closed.Top when isnotConnected[0]:
+                            g.DrawLine(thickPen, new(0, 60), new(800, 60));
+                            break;
+                        case Closed.Right when isnotConnected[1]:
+                            g.DrawLine(thickPen, new(740, 0), new(740, 800));
+                            break;
+                        case Closed.Bottom when isnotConnected[2]:
+                            g.DrawLine(thickPen, new(0, 740), new(800, 740));
+                            break;
+                        case Closed.Left when isnotConnected[3]:
+                            g.DrawLine(thickPen, new(60, 0), new(60, 800));
+                            break;
                     }
                 }
             }
@@ -741,14 +738,21 @@
                 {
                     foreach (var side in closedSides)
                     {
-                        if (side == Closed.Top)
-                            g.DrawLine(thickPen, new(0, 20), new(800, 20));
-                        else if (side == Closed.Right)
-                            g.DrawLine(thickPen, new(780, 0), new(780, 800));
-                        else if (side == Closed.Bottom)
-                            g.DrawLine(thickPen, new(0, 780), new(800, 780));
-                        else if (side == Closed.Left)
-                            g.DrawLine(thickPen, new(20, 0), new(20, 800));
+                        switch (side)
+                        {
+                            case Closed.Top:
+                                g.DrawLine(thickPen, new(0, 20), new(800, 20));
+                                break;
+                            case Closed.Right:
+                                g.DrawLine(thickPen, new(780, 0), new(780, 800));
+                                break;
+                            case Closed.Bottom:
+                                g.DrawLine(thickPen, new(0, 780), new(800, 780));
+                                break;
+                            case Closed.Left:
+                                g.DrawLine(thickPen, new(20, 0), new(20, 800));
+                                break;
+                        }
                     }
                 }
 
@@ -756,14 +760,21 @@
                 {
                     foreach (var side in closedSides)
                     {
-                        if (side == Closed.Top && isnotConnected[0])
-                            g.DrawLine(thickPen, new(0, 60), new(800, 60));
-                        else if (side == Closed.Right && isnotConnected[1])
-                            g.DrawLine(thickPen, new(740, 0), new(740, 800));
-                        else if (side == Closed.Bottom && isnotConnected[2])
-                            g.DrawLine(thickPen, new(0, 740), new(800, 740));
-                        else if (side == Closed.Left && isnotConnected[3])
-                            g.DrawLine(thickPen, new(60, 0), new(60, 800));
+                        switch (side)
+                        {
+                            case Closed.Top when isnotConnected[0]:
+                                g.DrawLine(thickPen, new(0, 60), new(800, 60));
+                                break;
+                            case Closed.Right when isnotConnected[1]:
+                                g.DrawLine(thickPen, new(740, 0), new(740, 800));
+                                break;
+                            case Closed.Bottom when isnotConnected[2]:
+                                g.DrawLine(thickPen, new(0, 740), new(800, 740));
+                                break;
+                            case Closed.Left when isnotConnected[3]:
+                                g.DrawLine(thickPen, new(60, 0), new(60, 800));
+                                break;
+                        }
                     }
                 }
             }

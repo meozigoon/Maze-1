@@ -28,303 +28,303 @@
         /// </summary>
         private void InitializeComponent()
         {
-            numericUpDown1 = new NumericUpDown();
-            button1 = new Button();
-            button2 = new Button();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            numericUpDown2 = new NumericUpDown();
-            label6 = new Label();
-            button3 = new Button();
-            numericUpDown3 = new NumericUpDown();
-            label7 = new Label();
-            button4 = new Button();
-            label8 = new Label();
-            label9 = new Label();
-            label10 = new Label();
-            groupBox1 = new GroupBox();
-            groupBox2 = new GroupBox();
-            button5 = new Button();
-            label5 = new Label();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
-            groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
+            SizeNumericUpDown = new NumericUpDown();
+            GenerateMazeButton = new Button();
+            RunButton = new Button();
+            BfsTimeLabel = new Label();
+            DfsTimeLabel = new Label();
+            MazeSizeLabel = new Label();
+            StraightTimePenalty = new Label();
+            StraightTimePenaltyNumericUpDown = new NumericUpDown();
+            LoopLimitLabel = new Label();
+            RunLoopButton = new Button();
+            LoopLimitNumericUpDown = new NumericUpDown();
+            LoopCountLabel = new Label();
+            Check2ndRunButton = new Button();
+            Check2ndLabel = new Label();
+            Dfs2ndTimeLabel = new Label();
+            Bfs2ndTimeLabel = new Label();
+            LoopGroupBox = new GroupBox();
+            Run2ndGroupBox = new GroupBox();
+            WriteButton = new Button();
+            CheckWriteLabel = new Label();
+            ((System.ComponentModel.ISupportInitialize)SizeNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)StraightTimePenaltyNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)LoopLimitNumericUpDown).BeginInit();
+            LoopGroupBox.SuspendLayout();
+            Run2ndGroupBox.SuspendLayout();
             SuspendLayout();
             // 
-            // numericUpDown1
+            // SizeNumericUpDown
             // 
-            numericUpDown1.Location = new Point(143, 9);
-            numericUpDown1.Margin = new Padding(2);
-            numericUpDown1.Maximum = new decimal(new int[] { 80, 0, 0, 0 });
-            numericUpDown1.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(129, 31);
-            numericUpDown1.TabIndex = 0;
-            numericUpDown1.Value = new decimal(new int[] { 2, 0, 0, 0 });
-            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
-            numericUpDown1.KeyDown += numericUpDown1_KeyDown;
+            SizeNumericUpDown.Location = new Point(143, 9);
+            SizeNumericUpDown.Margin = new Padding(2);
+            SizeNumericUpDown.Maximum = new decimal(new int[] { 80, 0, 0, 0 });
+            SizeNumericUpDown.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
+            SizeNumericUpDown.Name = "SizeNumericUpDown";
+            SizeNumericUpDown.Size = new Size(129, 31);
+            SizeNumericUpDown.TabIndex = 0;
+            SizeNumericUpDown.Value = new decimal(new int[] { 2, 0, 0, 0 });
+            SizeNumericUpDown.ValueChanged += SizeNumericUpDown_ValueChanged;
+            SizeNumericUpDown.KeyDown += SizeNumericUpDown_KeyDown;
             // 
-            // button1
+            // GenerateMazeButton
             // 
-            button1.Location = new Point(302, 5);
-            button1.Margin = new Padding(2);
-            button1.Name = "button1";
-            button1.Size = new Size(142, 36);
-            button1.TabIndex = 1;
-            button1.Text = "미로 만들기";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            GenerateMazeButton.Location = new Point(302, 5);
+            GenerateMazeButton.Margin = new Padding(2);
+            GenerateMazeButton.Name = "GenerateMazeButton";
+            GenerateMazeButton.Size = new Size(142, 36);
+            GenerateMazeButton.TabIndex = 1;
+            GenerateMazeButton.Text = "미로 만들기";
+            GenerateMazeButton.UseVisualStyleBackColor = true;
+            GenerateMazeButton.Click += GenerateMazeButton_Click;
             // 
-            // button2
+            // RunButton
             // 
-            button2.Enabled = false;
-            button2.Location = new Point(448, 5);
-            button2.Margin = new Padding(2);
-            button2.Name = "button2";
-            button2.Size = new Size(115, 36);
-            button2.TabIndex = 2;
-            button2.Text = "미로 실행";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            RunButton.Enabled = false;
+            RunButton.Location = new Point(448, 5);
+            RunButton.Margin = new Padding(2);
+            RunButton.Name = "RunButton";
+            RunButton.Size = new Size(115, 36);
+            RunButton.TabIndex = 2;
+            RunButton.Text = "미로 실행";
+            RunButton.UseVisualStyleBackColor = true;
+            RunButton.Click += RunButton_Click;
             // 
-            // label1
+            // BfsTimeLabel
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(9, 84);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(58, 25);
-            label1.TabIndex = 3;
-            label1.Text = "BFS : ";
+            BfsTimeLabel.AutoSize = true;
+            BfsTimeLabel.Location = new Point(9, 84);
+            BfsTimeLabel.Margin = new Padding(2, 0, 2, 0);
+            BfsTimeLabel.Name = "BfsTimeLabel";
+            BfsTimeLabel.Size = new Size(58, 25);
+            BfsTimeLabel.TabIndex = 3;
+            BfsTimeLabel.Text = "BFS : ";
             // 
-            // label2
+            // DfsTimeLabel
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(9, 116);
-            label2.Margin = new Padding(2, 0, 2, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(60, 25);
-            label2.TabIndex = 4;
-            label2.Text = "DFS : ";
+            DfsTimeLabel.AutoSize = true;
+            DfsTimeLabel.Location = new Point(9, 116);
+            DfsTimeLabel.Margin = new Padding(2, 0, 2, 0);
+            DfsTimeLabel.Name = "DfsTimeLabel";
+            DfsTimeLabel.Size = new Size(60, 25);
+            DfsTimeLabel.TabIndex = 4;
+            DfsTimeLabel.Text = "DFS : ";
             // 
-            // label3
+            // MazeSizeLabel
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(1, 11);
-            label3.Margin = new Padding(2, 0, 2, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(138, 25);
-            label3.TabIndex = 5;
-            label3.Text = "미로 한변 셀 수";
+            MazeSizeLabel.AutoSize = true;
+            MazeSizeLabel.Location = new Point(1, 11);
+            MazeSizeLabel.Margin = new Padding(2, 0, 2, 0);
+            MazeSizeLabel.Name = "MazeSizeLabel";
+            MazeSizeLabel.Size = new Size(138, 25);
+            MazeSizeLabel.TabIndex = 5;
+            MazeSizeLabel.Text = "미로 한변 셀 수";
             // 
-            // label4
+            // StraightTimePenalty
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(581, 11);
-            label4.Margin = new Padding(2, 0, 2, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(190, 25);
-            label4.TabIndex = 6;
-            label4.Text = "미로 설정 클럭 수(ms)";
+            StraightTimePenalty.AutoSize = true;
+            StraightTimePenalty.Location = new Point(581, 11);
+            StraightTimePenalty.Margin = new Padding(2, 0, 2, 0);
+            StraightTimePenalty.Name = "StraightTimePenalty";
+            StraightTimePenalty.Size = new Size(190, 25);
+            StraightTimePenalty.TabIndex = 6;
+            StraightTimePenalty.Text = "미로 설정 클럭 수(ms)";
             // 
-            // numericUpDown2
+            // StraightTimePenaltyNumericUpDown
             // 
-            numericUpDown2.Location = new Point(776, 11);
-            numericUpDown2.Margin = new Padding(2);
-            numericUpDown2.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
-            numericUpDown2.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(118, 31);
-            numericUpDown2.TabIndex = 7;
-            numericUpDown2.Value = new decimal(new int[] { 100, 0, 0, 0 });
+            StraightTimePenaltyNumericUpDown.Location = new Point(776, 11);
+            StraightTimePenaltyNumericUpDown.Margin = new Padding(2);
+            StraightTimePenaltyNumericUpDown.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            StraightTimePenaltyNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            StraightTimePenaltyNumericUpDown.Name = "StraightTimePenaltyNumericUpDown";
+            StraightTimePenaltyNumericUpDown.Size = new Size(118, 31);
+            StraightTimePenaltyNumericUpDown.TabIndex = 7;
+            StraightTimePenaltyNumericUpDown.Value = new decimal(new int[] { 100, 0, 0, 0 });
             // 
-            // label6
+            // LoopLimitLabel
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(8, 27);
-            label6.Margin = new Padding(2, 0, 2, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(57, 25);
-            label6.TabIndex = 10;
-            label6.Text = "n = 2";
+            LoopLimitLabel.AutoSize = true;
+            LoopLimitLabel.Location = new Point(8, 27);
+            LoopLimitLabel.Margin = new Padding(2, 0, 2, 0);
+            LoopLimitLabel.Name = "LoopLimitLabel";
+            LoopLimitLabel.Size = new Size(57, 25);
+            LoopLimitLabel.TabIndex = 10;
+            LoopLimitLabel.Text = "n = 2";
             // 
-            // button3
+            // RunLoopButton
             // 
-            button3.Location = new Point(8, 90);
-            button3.Margin = new Padding(2);
-            button3.Name = "button3";
-            button3.Size = new Size(90, 36);
-            button3.TabIndex = 11;
-            button3.Text = "Go";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            RunLoopButton.Location = new Point(8, 90);
+            RunLoopButton.Margin = new Padding(2);
+            RunLoopButton.Name = "RunLoopButton";
+            RunLoopButton.Size = new Size(90, 36);
+            RunLoopButton.TabIndex = 11;
+            RunLoopButton.Text = "Go";
+            RunLoopButton.UseVisualStyleBackColor = true;
+            RunLoopButton.Click += RunLoopButton_Click;
             // 
-            // numericUpDown3
+            // LoopLimitNumericUpDown
             // 
-            numericUpDown3.Location = new Point(8, 54);
-            numericUpDown3.Margin = new Padding(2);
-            numericUpDown3.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
-            numericUpDown3.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
-            numericUpDown3.Name = "numericUpDown3";
-            numericUpDown3.Size = new Size(90, 31);
-            numericUpDown3.TabIndex = 12;
-            numericUpDown3.Value = new decimal(new int[] { 10, 0, 0, 0 });
-            numericUpDown3.KeyDown += numericUpDown3_KeyDown;
+            LoopLimitNumericUpDown.Location = new Point(8, 54);
+            LoopLimitNumericUpDown.Margin = new Padding(2);
+            LoopLimitNumericUpDown.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
+            LoopLimitNumericUpDown.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
+            LoopLimitNumericUpDown.Name = "LoopLimitNumericUpDown";
+            LoopLimitNumericUpDown.Size = new Size(90, 31);
+            LoopLimitNumericUpDown.TabIndex = 12;
+            LoopLimitNumericUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
+            LoopLimitNumericUpDown.KeyDown += LoopLimitNumericUpDown_KeyDown;
             // 
-            // label7
+            // LoopCountLabel
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(8, 128);
-            label7.Margin = new Padding(2, 0, 2, 0);
-            label7.Name = "label7";
-            label7.Size = new Size(83, 25);
-            label7.TabIndex = 13;
-            label7.Text = "횟수 = 0";
+            LoopCountLabel.AutoSize = true;
+            LoopCountLabel.Location = new Point(8, 128);
+            LoopCountLabel.Margin = new Padding(2, 0, 2, 0);
+            LoopCountLabel.Name = "LoopCountLabel";
+            LoopCountLabel.Size = new Size(83, 25);
+            LoopCountLabel.TabIndex = 13;
+            LoopCountLabel.Text = "횟수 = 0";
             // 
-            // button4
+            // Check2ndRunButton
             // 
-            button4.Location = new Point(8, 76);
-            button4.Name = "button4";
-            button4.Size = new Size(87, 34);
-            button4.TabIndex = 14;
-            button4.Text = "2차 ON";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            Check2ndRunButton.Location = new Point(8, 76);
+            Check2ndRunButton.Name = "Check2ndRunButton";
+            Check2ndRunButton.Size = new Size(87, 34);
+            Check2ndRunButton.TabIndex = 14;
+            Check2ndRunButton.Text = "2차 ON";
+            Check2ndRunButton.UseVisualStyleBackColor = true;
+            Check2ndRunButton.Click += Check2ndRunButton_Click;
             // 
-            // label8
+            // Check2ndLabel
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(8, 113);
-            label8.Margin = new Padding(2, 0, 2, 0);
-            label8.Name = "label8";
-            label8.Size = new Size(52, 25);
-            label8.TabIndex = 15;
-            label8.Text = "False";
+            Check2ndLabel.AutoSize = true;
+            Check2ndLabel.Location = new Point(8, 113);
+            Check2ndLabel.Margin = new Padding(2, 0, 2, 0);
+            Check2ndLabel.Name = "Check2ndLabel";
+            Check2ndLabel.Size = new Size(52, 25);
+            Check2ndLabel.TabIndex = 15;
+            Check2ndLabel.Text = "False";
             // 
-            // label9
+            // Dfs2ndTimeLabel
             // 
-            label9.AutoSize = true;
-            label9.Location = new Point(8, 52);
-            label9.Margin = new Padding(2, 0, 2, 0);
-            label9.Name = "label9";
-            label9.Size = new Size(60, 25);
-            label9.TabIndex = 17;
-            label9.Text = "DFS : ";
+            Dfs2ndTimeLabel.AutoSize = true;
+            Dfs2ndTimeLabel.Location = new Point(8, 52);
+            Dfs2ndTimeLabel.Margin = new Padding(2, 0, 2, 0);
+            Dfs2ndTimeLabel.Name = "Dfs2ndTimeLabel";
+            Dfs2ndTimeLabel.Size = new Size(60, 25);
+            Dfs2ndTimeLabel.TabIndex = 17;
+            Dfs2ndTimeLabel.Text = "DFS : ";
             // 
-            // label10
+            // Bfs2ndTimeLabel
             // 
-            label10.AutoSize = true;
-            label10.Location = new Point(8, 27);
-            label10.Margin = new Padding(2, 0, 2, 0);
-            label10.Name = "label10";
-            label10.Size = new Size(58, 25);
-            label10.TabIndex = 16;
-            label10.Text = "BFS : ";
+            Bfs2ndTimeLabel.AutoSize = true;
+            Bfs2ndTimeLabel.Location = new Point(8, 27);
+            Bfs2ndTimeLabel.Margin = new Padding(2, 0, 2, 0);
+            Bfs2ndTimeLabel.Name = "Bfs2ndTimeLabel";
+            Bfs2ndTimeLabel.Size = new Size(58, 25);
+            Bfs2ndTimeLabel.TabIndex = 16;
+            Bfs2ndTimeLabel.Text = "BFS : ";
             // 
-            // groupBox1
+            // LoopGroupBox
             // 
-            groupBox1.Controls.Add(label6);
-            groupBox1.Controls.Add(numericUpDown3);
-            groupBox1.Controls.Add(button3);
-            groupBox1.Controls.Add(label7);
-            groupBox1.Location = new Point(9, 168);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(117, 161);
-            groupBox1.TabIndex = 19;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Loop";
+            LoopGroupBox.Controls.Add(LoopLimitLabel);
+            LoopGroupBox.Controls.Add(LoopLimitNumericUpDown);
+            LoopGroupBox.Controls.Add(RunLoopButton);
+            LoopGroupBox.Controls.Add(LoopCountLabel);
+            LoopGroupBox.Location = new Point(9, 168);
+            LoopGroupBox.Name = "LoopGroupBox";
+            LoopGroupBox.Size = new Size(117, 161);
+            LoopGroupBox.TabIndex = 19;
+            LoopGroupBox.TabStop = false;
+            LoopGroupBox.Text = "Loop";
             // 
-            // groupBox2
+            // Run2ndGroupBox
             // 
-            groupBox2.Controls.Add(label10);
-            groupBox2.Controls.Add(label9);
-            groupBox2.Controls.Add(button4);
-            groupBox2.Controls.Add(label8);
-            groupBox2.Location = new Point(9, 347);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(117, 147);
-            groupBox2.TabIndex = 20;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "2nd";
+            Run2ndGroupBox.Controls.Add(Bfs2ndTimeLabel);
+            Run2ndGroupBox.Controls.Add(Dfs2ndTimeLabel);
+            Run2ndGroupBox.Controls.Add(Check2ndRunButton);
+            Run2ndGroupBox.Controls.Add(Check2ndLabel);
+            Run2ndGroupBox.Location = new Point(9, 347);
+            Run2ndGroupBox.Name = "Run2ndGroupBox";
+            Run2ndGroupBox.Size = new Size(117, 147);
+            Run2ndGroupBox.TabIndex = 20;
+            Run2ndGroupBox.TabStop = false;
+            Run2ndGroupBox.Text = "2nd";
             // 
-            // button5
+            // WriteButton
             // 
-            button5.Location = new Point(9, 39);
-            button5.Name = "button5";
-            button5.Size = new Size(98, 34);
-            button5.TabIndex = 21;
-            button5.Text = "기록 ON";
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += button5_Click;
+            WriteButton.Location = new Point(9, 39);
+            WriteButton.Name = "WriteButton";
+            WriteButton.Size = new Size(98, 34);
+            WriteButton.TabIndex = 21;
+            WriteButton.Text = "기록 ON";
+            WriteButton.UseVisualStyleBackColor = true;
+            WriteButton.Click += WriteButton_Click;
             // 
-            // label5
+            // CheckWriteLabel
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(112, 44);
-            label5.Margin = new Padding(2, 0, 2, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(48, 25);
-            label5.TabIndex = 22;
-            label5.Text = "False";
+            CheckWriteLabel.AutoSize = true;
+            CheckWriteLabel.Location = new Point(112, 44);
+            CheckWriteLabel.Margin = new Padding(2, 0, 2, 0);
+            CheckWriteLabel.Name = "CheckWriteLabel";
+            CheckWriteLabel.Size = new Size(52, 25);
+            CheckWriteLabel.TabIndex = 22;
+            CheckWriteLabel.Text = "False";
             // 
-            // Form1
+            // Maze
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1062, 570);
-            Controls.Add(label5);
-            Controls.Add(button5);
-            Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
-            Controls.Add(numericUpDown2);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(numericUpDown1);
+            Controls.Add(CheckWriteLabel);
+            Controls.Add(WriteButton);
+            Controls.Add(Run2ndGroupBox);
+            Controls.Add(LoopGroupBox);
+            Controls.Add(StraightTimePenaltyNumericUpDown);
+            Controls.Add(StraightTimePenalty);
+            Controls.Add(MazeSizeLabel);
+            Controls.Add(DfsTimeLabel);
+            Controls.Add(BfsTimeLabel);
+            Controls.Add(RunButton);
+            Controls.Add(GenerateMazeButton);
+            Controls.Add(SizeNumericUpDown);
             Margin = new Padding(2);
-            Name = "Form1";
-            Text = "Form1";
-            SizeChanged += Form1_SizeChanged;
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown3).EndInit();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
+            Name = "Maze";
+            ShowIcon = false;
+            SizeChanged += Maze_SizeChanged;
+            ((System.ComponentModel.ISupportInitialize)SizeNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)StraightTimePenaltyNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)LoopLimitNumericUpDown).EndInit();
+            LoopGroupBox.ResumeLayout(false);
+            LoopGroupBox.PerformLayout();
+            Run2ndGroupBox.ResumeLayout(false);
+            Run2ndGroupBox.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private NumericUpDown numericUpDown1;
-        private Button button1;
-        private Button button2;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private NumericUpDown numericUpDown2;
-        private Label label6;
-        private Button button3;
-        private NumericUpDown numericUpDown3;
-        private Label label7;
-        private Button button4;
-        private Label label8;
-        private Label label9;
-        private Label label10;
-        private GroupBox groupBox1;
-        private GroupBox groupBox2;
-        private Button button5;
-        private Label label5;
+        private NumericUpDown SizeNumericUpDown;
+        private Button GenerateMazeButton;
+        private Button RunButton;
+        private Label BfsTimeLabel;
+        private Label DfsTimeLabel;
+        private Label MazeSizeLabel;
+        private Label StraightTimePenalty;
+        private NumericUpDown StraightTimePenaltyNumericUpDown;
+        private Label LoopLimitLabel;
+        private Button RunLoopButton;
+        private NumericUpDown LoopLimitNumericUpDown;
+        private Label LoopCountLabel;
+        private Button Check2ndRunButton;
+        private Label Check2ndLabel;
+        private Label Dfs2ndTimeLabel;
+        private Label Bfs2ndTimeLabel;
+        private GroupBox LoopGroupBox;
+        private GroupBox Run2ndGroupBox;
+        private Button WriteButton;
+        private Label CheckWriteLabel;
     }
 }
